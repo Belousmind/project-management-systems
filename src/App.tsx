@@ -5,6 +5,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import { BoardsPage, BoardPage, IssuesPage } from "./pages";
+import './App.css'
 
 function App() {
   return (

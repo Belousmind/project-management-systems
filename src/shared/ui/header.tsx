@@ -1,11 +1,17 @@
 import { Link } from "react-router-dom";
+import { Divider, Button } from "antd";
+
+import "./header.css";
 
 const Header = () => {
   return (
     <>
-      <Link to="/boards">Все задачи</Link>
-      <Link to="/issues">Проекты</Link>
-      <button>Создать задачу</button>
+      <nav>
+        <Link to="/issues">Все задачи</Link>
+        <Link to="/boards">Проекты</Link>
+        <Button type="primary">Создать задачу</Button>
+      </nav>
+      <Divider />
     </>
   );
 };
