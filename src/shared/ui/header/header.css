@@ -1,8 +1,11 @@
-.issue-item {
+header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 12px 20px;
-  background-color: lightcyan;
-  border-radius: 12px;
+}
+
+nav {
+  display: flex;
+  gap: 20px;
 }

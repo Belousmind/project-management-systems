@@ -1,0 +1,10 @@
+.issue-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background-color: rgb(135, 135, 135);
+  border-radius: 12px;
+  cursor: pointer;
+  color: white;
+}

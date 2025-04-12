@@ -1,0 +1,11 @@
+.board-column {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
