@@ -2,8 +2,8 @@ import { useParams, useLocation } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import "./board-page.css";
 
-import { Header, TaskItem } from "../../shared/ui";
-import { getBoardTasks, Task } from "../../shared/api";
+import { Header, TaskItem } from "@ui";
+import { getBoardTasks, Task } from "@api";
 
 const statuses = {
   InProgress: "In Progress",

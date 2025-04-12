@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import BoardItem from "./ui/board-item";
-import { Header } from "../../shared/ui";
-import { getBoards, BoardLite } from "../../shared/api";
+import { Header } from "@ui";
+import { getBoards, BoardLite } from "@api";
 
 const BoardsPage = () => {
   const { data, isLoading, error } = useQuery<BoardLite[]>({

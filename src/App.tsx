@@ -4,7 +4,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import { BoardsPage, BoardPage, TasksPage } from "./pages";
+import { BoardsPage, BoardPage, TasksPage } from "@pages";
 import "./App.css";
 
 function App() {

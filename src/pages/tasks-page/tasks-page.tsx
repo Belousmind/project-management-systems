@@ -1,8 +1,8 @@
-import { Header } from "../../shared/ui";
+import { Header } from "@ui";
 import { useQuery } from "@tanstack/react-query";
-import TaskItem from "../../shared/ui/task-item/task-item";
+import TaskItem from "@ui/task-item/task-item";
 
-import { getTasks, Task } from "../../shared/api";
+import { getTasks, Task } from "@api";
 
 const TasksPage = () => {
   const { data, isLoading, error } = useQuery<Task[]>({
