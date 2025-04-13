@@ -6,10 +6,11 @@ type AppModalProps = {
   open: boolean;
   onClose: () => void;
   taskId?: number;
+  onUpdated?: () => void;
   children?: ReactNode;
 };
 
-const AppModal = ({ open, onClose, taskId }: AppModalProps) => {
+const AppModal = ({ open, onClose, taskId, onUpdated }: AppModalProps) => {
   const isEdit = typeof taskId === "number";
   return (
     <Modal
@@ -19,7 +20,7 @@ const AppModal = ({ open, onClose, taskId }: AppModalProps) => {
       title={isEdit ? "Редактирование задачи" : "Создание задачи"}
       destroyOnClose
     >
-      <TaskForm taskId={taskId} />
+      <TaskForm taskId={taskId} onSuccess={onClose} onUpdated={onUpdated} />
     </Modal>
   );
 };

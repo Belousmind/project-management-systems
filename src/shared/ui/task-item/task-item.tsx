@@ -5,9 +5,10 @@ import { AppModal } from "@ui";
 type TaskItemProps = {
   id: number;
   title: string;
+  onUpdated?: () => void;
 };
 
-const TaskItem = ({ id, title }: TaskItemProps) => {
+const TaskItem = ({ id, title, onUpdated }: TaskItemProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -19,6 +20,7 @@ const TaskItem = ({ id, title }: TaskItemProps) => {
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         taskId={id}
+        onUpdated={onUpdated}
       ></AppModal>
     </>
   );

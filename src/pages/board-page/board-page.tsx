@@ -20,6 +20,7 @@ const BoardPage = () => {
     data: tasks,
     isLoading,
     error,
+    refetch
   } = useQuery<Task[]>({
     queryKey: ["board-tasks", id],
     queryFn: () => getBoardTasks(id!),
@@ -41,7 +42,7 @@ const BoardPage = () => {
             {tasks
               ?.filter((task) => task.status === statusKey)
               .map((task) => (
-                <TaskItem key={task.id} id={task.id} title={task.title} />
+                <TaskItem onUpdated={refetch} key={task.id} id={task.id} title={task.title} />
               ))}
           </div>
         ))}

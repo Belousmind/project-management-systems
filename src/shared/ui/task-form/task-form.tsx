@@ -14,9 +14,10 @@ import { useLocation, Link } from "react-router-dom";
 type TaskFormProps = {
   taskId?: number;
   onSuccess?: () => void;
+  onUpdated?: () => void;
 };
 
-const TaskForm = ({ taskId, onSuccess }: TaskFormProps) => {
+const TaskForm = ({ taskId, onSuccess, onUpdated }: TaskFormProps) => {
   const [boardId, setBoardId] = useState<number>();
   const [form] = Form.useForm();
   const queryClient = useQueryClient();
@@ -50,7 +51,6 @@ const TaskForm = ({ taskId, onSuccess }: TaskFormProps) => {
       });
     };
     fillForm();
-    console.log(taskData?.boardId);
   }, [taskData]);
 
   const mutation = useMutation({
@@ -62,6 +62,7 @@ const TaskForm = ({ taskId, onSuccess }: TaskFormProps) => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
       form.resetFields();
       onSuccess?.();
+      onUpdated?.();
     },
     onError: () => {
       message.error("Ошибка при сохранении задачи");
@@ -70,6 +71,7 @@ const TaskForm = ({ taskId, onSuccess }: TaskFormProps) => {
 
   const onFinish = (values: TaskPayload) => {
     mutation.mutate(values);
+    
   };
 
   return (
