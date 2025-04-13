@@ -1,15 +1,22 @@
 import "./task-item.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AppModal } from "@ui";
 
 type TaskItemProps = {
   id: number;
   title: string;
   onUpdated?: () => void;
+  openedByDefault?: boolean;
 };
 
-const TaskItem = ({ id, title, onUpdated }: TaskItemProps) => {
+const TaskItem = ({ id, title, onUpdated, openedByDefault }: TaskItemProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (openedByDefault) {
+      setIsModalOpen(true);
+    }
+  }, [openedByDefault]);
 
   return (
     <>

@@ -93,7 +93,7 @@ const TaskForm = ({ taskId, onSuccess, onUpdated }: TaskFormProps) => {
         <StatusSelect />
         <UserSelect />
 
-        {currentPath && <Link to={`/board/${boardId}`}>Перейти на доску</Link>}
+        {currentPath && <Link to={`/board/${boardId}`} state={{ taskId }}>Перейти на доску</Link>}
         <Button
           htmlType="submit"
           type="primary"

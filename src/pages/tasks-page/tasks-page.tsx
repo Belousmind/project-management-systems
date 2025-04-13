@@ -3,6 +3,11 @@ import TaskItem from "@ui/task-item/task-item";
 
 import { getTasks, Task } from "@api";
 
+// Фильтр по статусу задачи
+// Фильтр по доске, к которой он привязан
+// Поиск по названию задачи
+// Поиск по исполнителю
+
 const TasksPage = () => {
   const { data, isLoading, error } = useQuery<Task[]>({
     queryKey: ["tasks"],

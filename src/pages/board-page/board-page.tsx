@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import "./board-page.css";
 import { TaskItem } from "@ui";
@@ -15,6 +15,8 @@ const statuses = {
 const BoardPage = () => {
   const { id } = useParams();
   const [boardName, setBoardName] = useState("");
+  const location = useLocation();
+  const [modalTaskId, setModalTaskId] = useState<number>();
 
   useEffect(() => {
     if (id) {
@@ -23,6 +25,13 @@ const BoardPage = () => {
       });
     }
   }, [id]);
+
+  useEffect(() => {
+    const state = location.state as { taskId?: number };
+    if (state?.taskId) {
+      setModalTaskId(state.taskId);
+    }
+  }, [location.state]);
 
   const {
     data: tasks,
@@ -53,6 +62,7 @@ const BoardPage = () => {
                   key={task.id}
                   id={task.id}
                   title={task.title}
+                  openedByDefault={task.id === modalTaskId}
                 />
               ))}
           </div>
