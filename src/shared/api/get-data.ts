@@ -9,12 +9,7 @@ export const getTasks = () => request<Task[]>("/tasks");
 
 export const getTask = (id: string) => request<Task>(`/tasks`, `/${id}`);
 
-// export const getTeams = () => request("/teams");
-// export const getTeam = (id: string) => request(`/teams`, `/${id}`);
-
 export const getUsers = () => request<User[]>("/users");
-// export const getUserTasks = (id: string) =>
-//   request(`/users`, `/${id}/tasks`);
 
 export const createTask = async (data: TaskPayload) => {
   const res = await fetch("http://localhost:8080/api/v1/tasks/create", {
