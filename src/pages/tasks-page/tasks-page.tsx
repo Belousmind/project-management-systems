@@ -1,4 +1,3 @@
-import { Header } from "@ui";
 import { useQuery } from "@tanstack/react-query";
 import TaskItem from "@ui/task-item/task-item";
 
@@ -15,12 +14,9 @@ const TasksPage = () => {
 
   return (
     <>
-      <Header />
-      <main>
-        {data?.map((task) => (
-          <TaskItem key={task.id} title={task.title} id={task.id} />
-        ))}
-      </main>
+      {data?.map((task) => (
+        <TaskItem key={task.id} title={task.title} id={task.id} />
+      ))}
     </>
   );
 };

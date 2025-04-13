@@ -8,7 +8,7 @@ import {
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { createTask, TaskPayload, getTask, updateTask, getBoards } from "@api";
-import { getIdByName } from "@helpers/get-board-id";
+import { getIdByName } from "@helpers/get-id-by-name";
 import { useLocation, Link } from "react-router-dom";
 
 type TaskFormProps = {

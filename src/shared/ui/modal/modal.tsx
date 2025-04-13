@@ -1,6 +1,6 @@
 import { Modal } from "antd";
 import { ReactNode } from "react";
-import TaskForm from "./task-form/task-form";
+import TaskForm from "../task-form/task-form";
 
 type AppModalProps = {
   open: boolean;

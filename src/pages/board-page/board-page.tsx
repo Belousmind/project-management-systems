@@ -1,9 +1,10 @@
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import "./board-page.css";
-
-import { Header, TaskItem } from "@ui";
+import { TaskItem } from "@ui";
 import { getBoardTasks, Task } from "@api";
+import { useEffect, useState } from "react";
+import { getBoardNameById } from "@helpers/get-name-by-id";
 
 const statuses = {
   InProgress: "In Progress",
@@ -13,14 +14,21 @@ const statuses = {
 
 const BoardPage = () => {
   const { id } = useParams();
-  const location = useLocation();
-  const boardName = (location.state as { name?: string })?.name;
+  const [boardName, setBoardName] = useState("");
+
+  useEffect(() => {
+    if (id) {
+      getBoardNameById(Number(id)).then((name) => {
+        if (name) setBoardName(name);
+      });
+    }
+  }, [id]);
 
   const {
     data: tasks,
     isLoading,
     error,
-    refetch
+    refetch,
   } = useQuery<Task[]>({
     queryKey: ["board-tasks", id],
     queryFn: () => getBoardTasks(id!),
@@ -32,9 +40,7 @@ const BoardPage = () => {
 
   return (
     <>
-      <Header />
       <h1>{boardName}</h1>
-
       <div className="board">
         {Object.entries(statuses).map(([statusKey, statusTitle]) => (
           <div key={statusKey} className="board-column">
@@ -42,7 +48,12 @@ const BoardPage = () => {
             {tasks
               ?.filter((task) => task.status === statusKey)
               .map((task) => (
-                <TaskItem onUpdated={refetch} key={task.id} id={task.id} title={task.title} />
+                <TaskItem
+                  onUpdated={refetch}
+                  key={task.id}
+                  id={task.id}
+                  title={task.title}
+                />
               ))}
           </div>
         ))}

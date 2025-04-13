@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import BoardItem from "./ui/board-item";
-import { Header } from "@ui";
 import { getBoards, BoardLite } from "@api";
 
 const BoardsPage = () => {
@@ -14,12 +13,9 @@ const BoardsPage = () => {
 
   return (
     <>
-      <Header />
-      <main>
-        {data?.map((board) => (
-          <BoardItem key={board.id} id={board.id} name={board.name} />
-        ))}
-      </main>
+      {data?.map((board) => (
+        <BoardItem key={board.id} id={board.id} name={board.name} />
+      ))}
     </>
   );
 };
