@@ -15,7 +15,9 @@
       "@ui": ["src/shared/ui"],
       "@pages": ["src/pages"],
       "@helpers": ["src/shared/helpers"],
-      "@helpers/*": ["src/shared/helpers/*"]
+      "@helpers/*": ["src/shared/helpers/*"],
+      "@hooks/*": ["src/shared/hooks/*"],
+      "@hooks": ["src/shared/hooks"]
     },
 
     /* Bundler mode */

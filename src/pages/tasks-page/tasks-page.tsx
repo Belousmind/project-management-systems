@@ -1,25 +1,72 @@
 import { useQuery } from "@tanstack/react-query";
 import TaskItem from "@ui/task-item/task-item";
-
-import { getTasks, Task } from "@api";
-
-// Фильтр по статусу задачи
-// Фильтр по доске, к которой он привязан
-// Поиск по названию задачи
-// Поиск по исполнителю
+import { getTasks, getBoards, Task, BoardLite } from "@api";
+import { useDebounce, useTaskFilters } from "@hooks";
+import {
+  TaskTitleFilter,
+  TaskAssigneeFilter,
+  TaskBoardFilter,
+  TaskStatusFilter,
+} from "./ui";
+import { filterTasks } from "@helpers/filter-tasks";
 
 const TasksPage = () => {
-  const { data, isLoading, error } = useQuery<Task[]>({
+  const { filters, setFilter } = useTaskFilters();
+  const debouncedTitle = useDebounce(filters.title, 400);
+  const debouncedAssignee = useDebounce(filters.assignee, 400);
+
+  const {
+    data: tasks,
+    isLoading,
+    error,
+  } = useQuery<Task[]>({
     queryKey: ["tasks"],
     queryFn: getTasks,
   });
 
-  if (isLoading) return <p>Загрузка...</p>;
+  const { data: boards, isLoading: isBoardsLoading } = useQuery<BoardLite[]>({
+    queryKey: ["boards"],
+    queryFn: getBoards,
+  });
+
+  const filteredTasks = tasks
+  ? filterTasks(tasks, {
+      status: filters.status,
+      board: filters.board,
+      title: debouncedTitle,
+      assignee: debouncedAssignee,
+    })
+  : [];
+
+  if (isLoading) return <p>Загрузка задач...</p>;
   if (error instanceof Error) return <p>{error.message}</p>;
 
   return (
     <>
-      {data?.map((task) => (
+      <div>
+        <TaskTitleFilter
+          value={filters.title}
+          onChange={(value) => setFilter("title", value)}
+        />
+        <TaskAssigneeFilter
+          value={filters.assignee}
+          onChange={(value) => setFilter("assignee", value)}
+        />
+        <TaskStatusFilter
+          value={filters.status}
+          onChange={(value) => setFilter("status", value)}
+        />
+        <TaskBoardFilter
+          value={filters.board}
+          onChange={(value) => setFilter("board", value)}
+          boards={boards}
+          loading={isBoardsLoading}
+        />
+      </div>
+
+      {filteredTasks?.length === 0 && <p>Ничего не найдено</p>}
+
+      {filteredTasks?.map((task) => (
         <TaskItem key={task.id} title={task.title} id={task.id} />
       ))}
     </>

@@ -14,7 +14,8 @@ export default defineConfig({
       "@api": path.resolve(__dirname, "./src/shared/api"),
       "@ui": path.resolve(__dirname, "./src/shared/ui"),
       "@pages": path.resolve(__dirname, "./src/pages"),
-      "@helpers": path.resolve(__dirname, "./src/shared/helpers")
+      "@helpers": path.resolve(__dirname, "./src/shared/helpers"),
+      "@hooks": path.resolve(__dirname, "./src/shared/hooks")
     }
   }
 })
