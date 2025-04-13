@@ -13,7 +13,9 @@
       "@pages/*": ["src/pages/*"],
       "@api": ["src/shared/api"],
       "@ui": ["src/shared/ui"],
-      "@pages": ["src/pages"]
+      "@pages": ["src/pages"],
+      "@helpers": ["src/shared/helpers"],
+      "@helpers/*": ["src/shared/helpers/*"]
     },
 
     /* Bundler mode */

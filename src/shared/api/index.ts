@@ -1,2 +1,2 @@
-export * from "./getData";
+export * from "./get-data";
 export * from "./types";

@@ -62,3 +62,12 @@ export type TeamLite = {
   usersCount: number;
   boardsCount: number;
 };
+
+export type TaskPayload = {
+  title: string;
+  description: string;
+  status?: "Backlog" | "InProgress" | "Done";
+  priority: "Low" | "Medium" | "High";
+  boardId: number;
+  assigneeId: number;
+};

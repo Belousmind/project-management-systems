@@ -13,7 +13,8 @@ export default defineConfig({
     alias: {
       "@api": path.resolve(__dirname, "./src/shared/api"),
       "@ui": path.resolve(__dirname, "./src/shared/ui"),
-      "@pages": path.resolve(__dirname, "./src/pages")
+      "@pages": path.resolve(__dirname, "./src/pages"),
+      "@helpers": path.resolve(__dirname, "./src/shared/helpers")
     }
   }
 })
