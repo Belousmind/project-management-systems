@@ -6,9 +6,10 @@ import {
   PrioritySelect,
 } from "./fields";
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { createTask, TaskPayload, getTask, updateTask, getBoards } from "@api";
 import { getIdByName } from "@helpers/get-board-id";
+import { useLocation, Link } from "react-router-dom";
 
 type TaskFormProps = {
   taskId?: number;
@@ -16,8 +17,12 @@ type TaskFormProps = {
 };
 
 const TaskForm = ({ taskId, onSuccess }: TaskFormProps) => {
+  const [boardId, setBoardId] = useState<number>();
   const [form] = Form.useForm();
   const queryClient = useQueryClient();
+
+  const location = useLocation();
+  const currentPath = location.pathname === "/issues";
 
   const isEditMode = !!taskId;
 
@@ -32,6 +37,7 @@ const TaskForm = ({ taskId, onSuccess }: TaskFormProps) => {
       if (!taskData) return;
       if (!taskData?.boardName) return;
       const boardId = await getIdByName(getBoards, taskData.boardName);
+      setBoardId(boardId);
       const assigneeId = taskData.assignee?.id;
 
       form.setFieldsValue({
@@ -43,8 +49,8 @@ const TaskForm = ({ taskId, onSuccess }: TaskFormProps) => {
         assigneeId,
       });
     };
-
     fillForm();
+    console.log(taskData?.boardId);
   }, [taskData]);
 
   const mutation = useMutation({
@@ -85,6 +91,7 @@ const TaskForm = ({ taskId, onSuccess }: TaskFormProps) => {
         <StatusSelect />
         <UserSelect />
 
+        {currentPath && <Link to={`/board/${boardId}`}>Перейти на доску</Link>}
         <Button
           htmlType="submit"
           type="primary"
