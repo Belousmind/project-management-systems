@@ -9,6 +9,7 @@ import {
   TaskStatusFilter,
 } from "./ui";
 import { filterTasks } from "@helpers/filter-tasks";
+import "./task-page.css";
 
 const TasksPage = () => {
   const { filters, setFilter } = useTaskFilters();
@@ -30,20 +31,20 @@ const TasksPage = () => {
   });
 
   const filteredTasks = tasks
-  ? filterTasks(tasks, {
-      status: filters.status,
-      board: filters.board,
-      title: debouncedTitle,
-      assignee: debouncedAssignee,
-    })
-  : [];
+    ? filterTasks(tasks, {
+        status: filters.status,
+        board: filters.board,
+        title: debouncedTitle,
+        assignee: debouncedAssignee,
+      })
+    : [];
 
   if (isLoading) return <p>Загрузка задач...</p>;
   if (error instanceof Error) return <p>{error.message}</p>;
 
   return (
     <>
-      <div>
+      <div className="filters-container">
         <TaskTitleFilter
           value={filters.title}
           onChange={(value) => setFilter("title", value)}

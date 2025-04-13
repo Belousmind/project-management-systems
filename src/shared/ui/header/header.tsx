@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Divider, Button } from "antd";
 import "./header.css";
 import { useState } from "react";
@@ -11,8 +11,23 @@ const Header = () => {
     <>
       <header>
         <nav>
-          <Link to="/issues">Все задачи</Link>
-          <Link to="/boards">Проекты</Link>
+          <NavLink
+            to="/issues"
+            className={({ isActive }) =>
+              isActive ? "link active" : "link"
+            }
+          >
+            Все задачи
+          </NavLink>
+
+          <NavLink
+            to="/boards"
+            className={({ isActive }) =>
+              isActive ? "link active" : "link"
+            }
+          >
+            Проекты
+          </NavLink>
         </nav>
         <Button type="primary" onClick={() => setIsModalOpen(true)}>
           Создать задачу

@@ -71,7 +71,6 @@ const TaskForm = ({ taskId, onSuccess, onUpdated }: TaskFormProps) => {
 
   const onFinish = (values: TaskPayload) => {
     mutation.mutate(values);
-    
   };
 
   return (
@@ -93,14 +92,28 @@ const TaskForm = ({ taskId, onSuccess, onUpdated }: TaskFormProps) => {
         <StatusSelect />
         <UserSelect />
 
-        {currentPath && <Link to={`/board/${boardId}`} state={{ taskId }}>Перейти на доску</Link>}
-        <Button
-          htmlType="submit"
-          type="primary"
-          loading={mutation.isPending || isTaskLoading}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginTop: "1rem",
+          }}
         >
-          {isEditMode ? "Обновить" : "Создать"}
-        </Button>
+          {currentPath && taskId && (
+            <Link to={`/board/${boardId}`} state={{ taskId }}>
+              Перейти на доску
+            </Link>
+          )}
+
+          <Button
+            htmlType="submit"
+            type="primary"
+            loading={mutation.isPending || isTaskLoading}
+          >
+            {isEditMode ? "Обновить" : "Создать"}
+          </Button>
+        </div>
       </Form>
     </>
   );

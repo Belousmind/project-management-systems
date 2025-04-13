@@ -10,6 +10,7 @@ const TaskTitleFilter = ({ value, onChange }: Props) => (
     placeholder="Поиск по названию"
     value={value}
     onChange={(e) => onChange(e.target.value)}
+    className="input-filter"
   />
 );
 

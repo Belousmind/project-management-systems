@@ -1,0 +1,15 @@
+.filters-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+.select-filter {
+  max-width: 200px;
+  width: 100%;
+}
+.input-filter {
+  max-width: 240px;
+}
+

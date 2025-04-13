@@ -17,6 +17,7 @@ const TaskBoardFilter = ({ value, onChange, boards, loading }: Props) => (
     value={value}
     loading={loading}
     onChange={onChange}
+    className="select-filter"
   >
     {boards?.map((board) => (
       <Option key={board.id} value={board.name}>

@@ -54,17 +54,19 @@ const BoardPage = () => {
         {Object.entries(statuses).map(([statusKey, statusTitle]) => (
           <div key={statusKey} className="board-column">
             <h2>{statusTitle}</h2>
-            {tasks
-              ?.filter((task) => task.status === statusKey)
-              .map((task) => (
-                <TaskItem
-                  onUpdated={refetch}
-                  key={task.id}
-                  id={task.id}
-                  title={task.title}
-                  openedByDefault={task.id === modalTaskId}
-                />
-              ))}
+            <div className="board-column__tasks">
+              {tasks
+                ?.filter((task) => task.status === statusKey)
+                .map((task) => (
+                  <TaskItem
+                    onUpdated={refetch}
+                    key={task.id}
+                    id={task.id}
+                    title={task.title}
+                    openedByDefault={task.id === modalTaskId}
+                  />
+                ))}
+            </div>
           </div>
         ))}
       </div>

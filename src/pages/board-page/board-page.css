@@ -9,3 +9,13 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
 }
+
+.board-column__tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-radius: 8px;
+  border: 2px var(--color-grey-900) dashed;
+  padding: .5rem;
+  min-height: 120px;
+}

@@ -9,3 +9,19 @@ nav {
   display: flex;
   gap: 20px;
 }
+
+.link {
+  color: var(--color-grey-500);
+  text-decoration: none;
+  padding: 0.5rem;
+  transition: color 0.3s;
+}
+
+.link:hover {
+  color: var(--color-grey-900);
+}
+
+.link.active {
+  color: var(--color-grey-900);
+  font-weight: bold;
+}

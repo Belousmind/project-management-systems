@@ -13,6 +13,7 @@ const TaskStatusFilter = ({ value, onChange }: Props) => (
     allowClear
     value={value}
     onChange={onChange}
+    className="select-filter"
   >
     <Option value="Backlog">Backlog</Option>
     <Option value="InProgress">In Progress</Option>
