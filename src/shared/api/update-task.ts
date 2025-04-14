@@ -1,7 +1,8 @@
 import { TaskPayload } from "./types";
+import { base_url } from "../services/requests";
 
 export const updateTask = (id: number, data: TaskPayload) =>
-  fetch(`http://localhost:8080/api/v1/tasks/update/${id}`, {
+  fetch(`${base_url}/tasks/update/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),

@@ -1,7 +1,8 @@
 import { TaskPayload } from "./types";
+import { base_url } from "../services/requests";
 
 export const createTask = async (data: TaskPayload) => {
-  const res = await fetch("http://localhost:8080/api/v1/tasks/create", {
+  const res = await fetch(`${base_url}/tasks/create`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),

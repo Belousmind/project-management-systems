@@ -17,7 +17,8 @@
       "@helpers": ["src/shared/helpers"],
       "@helpers/*": ["src/shared/helpers/*"],
       "@hooks/*": ["src/shared/hooks/*"],
-      "@hooks": ["src/shared/hooks"]
+      "@hooks": ["src/shared/hooks"],
+      "@services/*": ["src/shared/services/*"]
     },
 
     /* Bundler mode */

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { TaskItem } from "@ui";
 import { getBoardTasks, Task } from "@api";
 import { getBoardNameById } from "@helpers/get-name-by-id";
+import { base_url } from "@services/requests";
 
 import {
   DragDropContext,
@@ -15,9 +16,9 @@ import {
 import "./board-page.css";
 
 const statuses = {
+  Backlog: "Backlog",
   InProgress: "In Progress",
   Done: "Done",
-  Backlog: "Backlog",
 };
 
 const BoardPage = () => {
@@ -54,7 +55,7 @@ const BoardPage = () => {
 
   const updateStatus = async (taskId: number, newStatus: string) => {
     try {
-      await fetch(`http://localhost:8080/api/v1/tasks/updateStatus/${taskId}`, {
+      await fetch(`${base_url}/tasks/updateStatus/${taskId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: newStatus }),
@@ -82,15 +83,17 @@ const BoardPage = () => {
       <DragDropContext onDragEnd={handleDragEnd}>
         <div className="board">
           {Object.entries(statuses).map(([statusKey, statusTitle]) => (
-            <Droppable droppableId={statusKey} key={statusKey}>
-              {(provided) => (
-                <div
-                  className="board-column"
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                >
-                  <h2>{statusTitle}</h2>
-                  <div className="board-column__tasks">
+            <div className="board-column" key={statusKey}>
+              <h2>{statusTitle}</h2>
+              <Droppable droppableId={statusKey}>
+                {(provided, snapshot) => (
+                  <div
+                    className={`board-column__tasks ${
+                      snapshot.isDraggingOver ? "drag-over" : ""
+                    }`}
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                  >
                     {tasks
                       ?.filter((task) => task.status === statusKey)
                       .map((task, index) => (
@@ -118,9 +121,9 @@ const BoardPage = () => {
                       ))}
                     {provided.placeholder}
                   </div>
-                </div>
-              )}
-            </Droppable>
+                )}
+              </Droppable>
+            </div>
           ))}
         </div>
       </DragDropContext>

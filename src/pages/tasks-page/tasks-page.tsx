@@ -9,9 +9,13 @@ import {
   TaskStatusFilter,
 } from "./ui";
 import { filterTasks } from "@helpers/filter-tasks";
+import { useState } from "react";
 import "./task-page.css";
+import { Button } from "antd";
+import { AppModal } from "@ui/index";
 
 const TasksPage = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { filters, setFilter } = useTaskFilters();
   const debouncedTitle = useDebounce(filters.title, 400);
   const debouncedAssignee = useDebounce(filters.assignee, 400);
@@ -70,6 +74,12 @@ const TasksPage = () => {
       {filteredTasks?.map((task) => (
         <TaskItem key={task.id} title={task.title} id={task.id} />
       ))}
+
+      <Button className="create-task-button" type="primary" onClick={() => setIsModalOpen(true)}>
+        Создать задачу
+      </Button>
+
+      <AppModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );
 };
