@@ -1,6 +1,6 @@
 ## Тестовое задание Project Management Systems
 
-### Испоьлзуемые технологии: 
+### Используемые технологии: 
 React, TypeScript, react-router-dom, Antd, TanStack, hello-pangea/dnd, path, url, Vite
 * hello-pangea/dnd - Drag-and-drop функциональность
 * path, url - вспомогательные утилиты для работы с путями
