@@ -12,6 +12,7 @@ type TaskItemProps = {
 const TaskItem = ({ id, title, onUpdated, openedByDefault }: TaskItemProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // При первом рендере — открываем модальное окно, если задано openedByDefault
   useEffect(() => {
     if (openedByDefault) {
       setIsModalOpen(true);

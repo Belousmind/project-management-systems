@@ -16,10 +16,14 @@ import { AppModal } from "@ui/index";
 
 const TasksPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Хук для управления фильтрами задач (название, исполнитель, статус, проект)
   const { filters, setFilter } = useTaskFilters();
+  // Дебаунс для фильтрации по названию и исполнителю
   const debouncedTitle = useDebounce(filters.title, 400);
   const debouncedAssignee = useDebounce(filters.assignee, 400);
 
+  // Получение списка задач
   const {
     data: tasks,
     isLoading,
@@ -29,11 +33,13 @@ const TasksPage = () => {
     queryFn: getTasks,
   });
 
+  // Получение списка проектов для фильтра
   const { data: boards, isLoading: isBoardsLoading } = useQuery<BoardLite[]>({
     queryKey: ["boards"],
     queryFn: getBoards,
   });
 
+  // Применяем фильтрацию с учетом debounce-значений
   const filteredTasks = tasks
     ? filterTasks(tasks, {
         status: filters.status,

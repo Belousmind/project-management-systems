@@ -17,6 +17,7 @@ type TaskFormProps = {
   onUpdated?: () => void;
 };
 
+// Основная форма создания / редактирования задачи
 const TaskForm = ({ taskId, onSuccess, onUpdated }: TaskFormProps) => {
   const [boardId, setBoardId] = useState<number>();
   const [form] = Form.useForm();
@@ -27,12 +28,14 @@ const TaskForm = ({ taskId, onSuccess, onUpdated }: TaskFormProps) => {
 
   const isEditMode = !!taskId;
 
+  // Получаем данные задачи, если передан taskId
   const { data: taskData, isLoading: isTaskLoading } = useQuery({
     queryKey: ["task", taskId],
     queryFn: () => getTask(String(taskId)),
     enabled: !!taskId,
   });
 
+  // Заполняем форму значениями, если это режим редактирования
   useEffect(() => {
     const fillForm = async () => {
       if (!taskData) return;
@@ -40,7 +43,7 @@ const TaskForm = ({ taskId, onSuccess, onUpdated }: TaskFormProps) => {
       const boardId = await getIdByName(getBoards, taskData.boardName);
       setBoardId(boardId);
       const assigneeId = taskData.assignee?.id;
-
+      // Предзаполняем поля формы
       form.setFieldsValue({
         title: taskData.title,
         description: taskData.description,
@@ -53,6 +56,7 @@ const TaskForm = ({ taskId, onSuccess, onUpdated }: TaskFormProps) => {
     fillForm();
   }, [taskData]);
 
+  // Создание или обновление задачи
   const mutation = useMutation({
     mutationFn: isEditMode
       ? (data: TaskPayload) => updateTask(taskId!, data)

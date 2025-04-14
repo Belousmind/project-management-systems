@@ -22,11 +22,15 @@ const statuses = {
 };
 
 const BoardPage = () => {
+  // Получаем параметры маршрута и состояние перехода
   const { id } = useParams();
   const location = useLocation();
+  
+  // Локальное состояние: имя доски и ID задачи, открытой в модальном окне
   const [boardName, setBoardName] = useState("");
   const [modalTaskId, setModalTaskId] = useState<number>();
 
+  // При монтировании компонента получаем имя доски по её ID
   useEffect(() => {
     if (id) {
       getBoardNameById(Number(id)).then((name) => {
@@ -35,6 +39,7 @@ const BoardPage = () => {
     }
   }, [id]);
 
+  // Если при переходе в location передан taskId, открываем соответствующую задачу
   useEffect(() => {
     const state = location.state as { taskId?: number };
     if (state?.taskId) {
@@ -42,10 +47,12 @@ const BoardPage = () => {
     }
   }, [location.state]);
 
+  // Получаем задачи доски по её ID
   const {
     data: tasks,
     isLoading,
     error,
+    // Перезапрашиваем задачи после обновления
     refetch,
   } = useQuery<Task[]>({
     queryKey: ["board-tasks", id],
@@ -53,6 +60,7 @@ const BoardPage = () => {
     enabled: !!id,
   });
 
+  // Обновление статуса задачи
   const updateStatus = async (taskId: number, newStatus: string) => {
     try {
       await fetch(`${base_url}/tasks/updateStatus/${taskId}`, {
@@ -66,6 +74,7 @@ const BoardPage = () => {
     }
   };
 
+  // Обработка завершения перетаскивания
   const handleDragEnd = (result: DropResult) => {
     const { source, destination, draggableId } = result;
     if (!destination || destination.droppableId === source.droppableId) return;
@@ -80,11 +89,14 @@ const BoardPage = () => {
   return (
     <>
       <h1>{boardName}</h1>
+      {/* Обёртка drag-and-drop логики */}
       <DragDropContext onDragEnd={handleDragEnd}>
         <div className="board">
+           {/* Отрисовка колонок задач по статусам */}
           {Object.entries(statuses).map(([statusKey, statusTitle]) => (
             <div className="board-column" key={statusKey}>
               <h2>{statusTitle}</h2>
+              {/* Каждая колонка — это область, куда можно сбрасывать задачи */}
               <Droppable droppableId={statusKey}>
                 {(provided, snapshot) => (
                   <div
