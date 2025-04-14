@@ -1,9 +1,0 @@
-.board-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 20px;
-  background-color: var(--color-white);
-  border-radius: 12px;
-  color: var(--color-grey-500);
-}
