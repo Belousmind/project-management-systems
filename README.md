@@ -8,9 +8,10 @@ React, TypeScript, react-router-dom, Antd, TanStack, hello-pangea/dnd, path, url
 
 ### Как запустить проект 
 1. Выполнить команду  <pre><code>`git clone https://github.com/Belousmind/project-management-systems.git`</code></pre>
-2. <pre><code>npm install</code></pre>
-3. <pre><code>npm run dev</code></pre>
-4. [Запустить `server` (альтернативный запуск через Go)](https://github.com/avito-tech/tech-internship/tree/main/Tech%20Internships/Frontend/Frontend-trainee-assignment-spring-2025/server)
+2. Перейти в директорию проекта
+3. <pre><code>npm install</code></pre>
+4. <pre><code>npm run dev</code></pre>
+5. [Запустить `server` (альтернативный запуск через Go)](https://github.com/avito-tech/tech-internship/tree/main/Tech%20Internships/Frontend/Frontend-trainee-assignment-spring-2025/server)
 
 #### Реализовано:
 - [x] Просмотр всех задач: отображение всех созданных задач<br/>
